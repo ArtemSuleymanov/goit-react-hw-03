@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContactList from "./components/ContactList/ContactList";
+import SearchBox from "./components/SearchBox/SearchBox";
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -8,6 +9,20 @@ const App = () => {
     { id: "id-3", name: "Eden Clements", number: "645-17-79" },
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
+
+  const [filter, setFilter] = useState("");
+
+  const filterFunction = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const getFilterContacts = () => {
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  const filterContacts = getFilterContacts();
 
   const deleteContact = (contactId) => {
     setContacts((prevContacts) =>
@@ -18,7 +33,8 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactList contacts={contacts} onDeleteContact={deleteContact} />
+      <SearchBox value={filter} onChange={filterFunction} />
+      <ContactList contacts={filterContacts} onDeleteContact={deleteContact} />
     </div>
   );
 };
