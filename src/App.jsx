@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
+import ContactForm from "./components/ContactForm/ContactForm";
+import { nanoid } from "nanoid";
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -30,9 +32,29 @@ const App = () => {
     );
   };
 
+  const addContact = ({ name, number }) => {
+    const isDuplicate = contacts.some(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    setContacts((prevContacts) => [newContact, ...prevContacts]);
+  };
+
   return (
     <div>
       <h1>Phonebook</h1>
+      <ContactForm onAddContact={addContact} />
       <SearchBox value={filter} onChange={filterFunction} />
       <ContactList contacts={filterContacts} onDeleteContact={deleteContact} />
     </div>
