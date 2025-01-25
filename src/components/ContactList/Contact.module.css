@@ -1,0 +1,39 @@
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.number {
+  font-size: 14px;
+  color: #555;
+}
+
+.deleteButton {
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #ddd;
+  color: #000;
+}
