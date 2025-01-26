@@ -12,13 +12,10 @@ const App = () => {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ];
 
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem("contacts")) ?? initialContacts
+  );
   const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    const savedContacts = JSON.parse(localStorage.getItem("contacts"));
-    setContacts(savedContacts || initialContacts);
-  }, []);
 
   useEffect(() => {
     if (contacts.length > 0) {
